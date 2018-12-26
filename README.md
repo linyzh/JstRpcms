@@ -7,26 +7,22 @@
 前端：Thymeleaf
 后端：Springboot
 数据库：MSSqlServer
-
+中间件运行平台：Tomcat7及以上版本
 
 #### 安装教程
 
-1. xxxx
-2. xxxx
-3. xxxx
+1. 安装Tomcat7及以上版本
+2. 通过maven打包war项目
+3. 将打包好的war放到tomcat的webapps目录下即可
 
-#### 使用说明
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### 参与贡献
-
-1. Fork 本仓库
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
+#### 所用技术
+1. 前端web页面使用Thymeleaf
+2. 后端业务基于Springboot框架
+2.1 采用HikariDataSource
+2.2 Socket通信
+3.mybatis ORM操作
+4.maven 构建、打包、发布
+5.mssqlserver sql语句
 
 
 #### 码云特技
