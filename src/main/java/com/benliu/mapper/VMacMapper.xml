@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benliu.mapper.VMacMapper">
+    <resultMap id="VMacMapperMap" type="com.benliu.entity.VMac">
+        <result property="id" column="id"/>
+        <result property="macId" column="通信机ID"/>
+
+        <result property="lineId" column="线路ID"/>
+        <result property="lineId" column="线路ID"/>
+
+        <result property="VMacName" column="名称"/>
+
+
+    </resultMap>
+    <select id="getVMacByLineId" parameterType="int" resultMap="VMacMapperMap">
+      SELECT [id],[通信机ID],[线路ID],[名称]
+      FROM [虚拟通信机]
+      WHERE [线路ID]=#{lineId}
+    </select>
+</mapper>

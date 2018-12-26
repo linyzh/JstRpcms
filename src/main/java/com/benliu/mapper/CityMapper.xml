@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benliu.mapper.CityMapper">
+    <resultMap id="CityMapper" type="com.benliu.entity.City">
+        <result property="cityId" column="city_id"/>
+        <result property="provinceId" column="province_id"/>
+        <result property="cityName" column="name"/>
+        <result property="divisionNo" column="division_no"/>
+
+    </resultMap>
+
+    <select id="getCithById" parameterType="int" resultMap="CityMapper">
+         SELECT [city_id],[province_id],[name],[division_no]
+         FROM [city]
+         WHERE [city_id]=#{cityId}
+    </select>
+</mapper>

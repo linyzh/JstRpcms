@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.benliu.mapper.WIMapper">
+
+    <resultMap id="WarningInfoMap" type="com.benliu.entity.WarningInfo">
+        <result property="warnTime" column="告警时间"/>
+        <result property="capacitorId" column="电容器ID"/>
+        <result property="capacitorSecondId" column="电容器子ID"/>
+        <result property="warnType" column="告警类型"/>
+        <result property="exception" column="异常"/>
+        <result property="voltage_A" column="A相电压"/>
+        <result property="voltage_B" column="B相电压"/>
+        <result property="voltage_C" column="C相电压"/>
+        <result property="current_A" column="A相电流"/>
+        <result property="current_B" column="B相电流"/>
+        <result property="current_C" column="C相电流"/>
+        <result property="cHarmonic_A" column="A相电流谐波"/>
+        <result property="cHarmonic_B" column="B相电流谐波"/>
+        <result property="cHarmonic_C" column="C相电流谐波"/>
+        <result property="vHarmonic_A" column="A相电压谐波"/>
+        <result property="vHarmonic_B" column="B相电压谐波"/>
+        <result property="vHarmonic_C" column="C相电压谐波"/>
+        <result property="temperature" column="温度"/>
+        <result property="brokenTime" column="故障次数"/>
+    </resultMap>
+
+    <select id="getWIList" parameterType="Map" resultMap="WarningInfoMap">
+
+        SELECT  [告警ID],B.[告警类型],
+                [电容器ID],[电容器子ID],[告警时间],[异常],[故障次数],
+                Convert(decimal(18,2),[A相电压])AS[A相电压], Convert(decimal(18,2),[B相电压])AS[B相电压],
+                Convert(decimal(18,2),[C相电压])AS[C相电压],
+                Convert(decimal(18,2),[A相电流])AS[A相电流], Convert(decimal(18,2),[B相电流])AS[B相电流],
+                Convert(decimal(18,2),[C相电流])AS[C相电流],
+                Convert(decimal(18,2),[温度])AS[温度],
+                Convert(decimal(18,2),[A相电压谐波])AS[A相电压谐波], Convert(decimal(18,2),[B相电压谐波])AS[B相电压谐波],
+                Convert(decimal(18,2),[C相电压谐波])AS[C相电压谐波],
+                Convert(decimal(18,2),[A相电流谐波])AS[A相电流谐波], Convert(decimal(18,2),[B相电流谐波])AS[B相电流谐波],
+                Convert(decimal(18,2),[C相电流谐波])AS[C相电流谐波]
+        FROM
+        (
+            (
+                SELECT [告警ID],[电容器ID],[电容器子ID],[告警类型ID],[告警时间],[异常],[故障次数]
+                        ,[A相电压],[B相电压],[C相电压],[A相电流],[B相电流],[C相电流],[温度]
+                        ,[A相电压谐波],[B相电压谐波],[C相电压谐波],[A相电流谐波],[B相电流谐波],[C相电流谐波]
+                FROM [告警数据]
+                WHERE [通信机ID]=#{machineId} AND ([告警时间] BETWEEN #{dateBegin} AND #{dateEnd})
+                        <if test='capacitorId !="" '>
+                            AND [电容器ID] = #{capacitorId}
+                        </if>
+                        <if test='capacitorSecondId =="NULL"'>
+                            AND [电容器子ID] IS NULL
+                        </if>
+                        <if test='capacitorSecondId !="" and capacitorSecondId!="NULL"'>
+                            AND [电容器子ID] = #{capacitorSecondId}
+                        </if>
+
+            )AS A
+            LEFT JOIN
+            (
+                SELECT [告警类型ID],[告警类型]
+                FROM [告警类型]
+            )AS B
+            ON A.[告警类型ID]=B.[告警类型ID]
+        )
+        ORDER BY [告警ID]  ASC
+
+    </select>
+
+    <select id="getLastTenWI" parameterType="Map" resultMap="WarningInfoMap">
+        SELECT  B.[告警类型],
+                [电容器ID],[电容器子ID],[告警时间],[异常],[故障次数],
+                Convert(decimal(18,2),[A相电压])AS[A相电压], Convert(decimal(18,2),[B相电压])AS[B相电压],
+                Convert(decimal(18,2),[C相电压])AS[C相电压],
+                Convert(decimal(18,2),[A相电流])AS[A相电流], Convert(decimal(18,2),[B相电流])AS[B相电流],
+                Convert(decimal(18,2),[C相电流])AS[C相电流],
+                Convert(decimal(18,2),[温度])AS[温度],
+                Convert(decimal(18,2),[A相电压谐波])AS[A相电压谐波], Convert(decimal(18,2),[B相电压谐波])AS[B相电压谐波],
+                Convert(decimal(18,2),[C相电压谐波])AS[C相电压谐波],
+                Convert(decimal(18,2),[A相电流谐波])AS[A相电流谐波], Convert(decimal(18,2),[B相电流谐波])AS[B相电流谐波],
+                Convert(decimal(18,2),[C相电流谐波])AS[C相电流谐波]
+        FROM
+        (
+            (
+                SELECT TOP 10 [电容器ID],[电容器子ID],[告警类型ID],[告警时间],[异常],[故障次数]
+                    ,[A相电压],[B相电压],[C相电压],[A相电流],[B相电流],[C相电流],[温度]
+                    ,[A相电压谐波],[B相电压谐波],[C相电压谐波],[A相电流谐波],[B相电流谐波],[C相电流谐波]
+                FROM [告警数据]
+                WHERE [通信机ID]=#{machineId}
+                        <if test='capacitorId !="" '>
+                            AND [电容器ID] = #{capacitorId}
+                        </if>
+                        <if test='capacitorSecondId =="NULL"'>
+                            AND [电容器子ID] IS NULL
+                        </if>
+                        <if test='capacitorSecondId !="" and capacitorSecondId!="NULL"'>
+                            AND [电容器子ID] = #{capacitorSecondId}
+                        </if>
+                ORDER BY [告警ID] DESC
+            )AS A
+            LEFT JOIN
+            (
+                SELECT [告警类型ID],[告警类型]
+                FROM [告警类型]
+            )AS B
+            ON A.[告警类型ID]=B.[告警类型ID]
+        )
+    </select>
+
+</mapper>

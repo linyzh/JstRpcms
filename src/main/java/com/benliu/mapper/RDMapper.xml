@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.benliu.mapper.RDMapper">
+
+    <resultMap id="RealDataMap" type="com.benliu.entity.RealData">
+        <result property="repoTime" column="上报时间"/>
+        <result property="voltage_A" column="A相电压"/>
+        <result property="voltage_B" column="B相电压"/>
+        <result property="voltage_C" column="C相电压"/>
+        <result property="current_A" column="A相电流"/>
+        <result property="current_B" column="B相电流"/>
+        <result property="current_C" column="C相电流"/>
+        <result property="reactivePower_A" column="A相无功功率"/>
+        <result property="reactivePower_B" column="B相无功功率"/>
+        <result property="reactivePower_C" column="C相无功功率"/>
+        <result property="reactivePower_sum" column="总无功功率"/>
+        <result property="activePower_A" column="A相有功功率"/>
+        <result property="activePower_B" column="B相有功功率"/>
+        <result property="activePower_C" column="C相有功功率"/>
+        <result property="activePower_sum" column="总有功功率"/>
+        <result property="powerFactor_A" column="A相功率因数"/>
+        <result property="powerFactor_B" column="B相功率因数"/>
+        <result property="powerFactor_C" column="C相功率因数"/>
+        <result property="powerFactor_sum" column="总功率因数"/>
+        <result property="apparentPower_A" column="A相视在功率"/>
+        <result property="apparentPower_B" column="B相视在功率"/>
+        <result property="apparentPower_C" column="C相视在功率"/>
+        <result property="apparentPower_sum" column="总视在功率"/>
+        <result property="V_Harmonic_A_3" column="A相电压3次谐波"/>
+        <result property="V_Harmonic_A_5" column="A相电压5次谐波"/>
+        <result property="V_Harmonic_A_7" column="A相电压7次谐波"/>
+        <result property="V_Harmonic_A_9" column="A相电压9次谐波"/>
+        <result property="V_Harmonic_A_11" column="A相电压11次谐波"/>
+        <result property="V_Harmonic_A_sum" column="A相电压谐波"/>
+        <result property="V_Harmonic_B_3" column="B相电压3次谐波"/>
+        <result property="V_Harmonic_B_5" column="B相电压5次谐波"/>
+        <result property="V_Harmonic_B_7" column="B相电压7次谐波"/>
+        <result property="V_Harmonic_B_9" column="B相电压9次谐波"/>
+        <result property="V_Harmonic_B_11" column="B相电压11次谐波"/>
+        <result property="V_Harmonic_B_sum" column="B相电压谐波"/>
+        <result property="V_Harmonic_C_3" column="C相电压3次谐波"/>
+        <result property="V_Harmonic_C_5" column="C相电压5次谐波"/>
+        <result property="V_Harmonic_C_7" column="C相电压7次谐波"/>
+        <result property="V_Harmonic_C_9" column="C相电压9次谐波"/>
+        <result property="V_Harmonic_C_11" column="C相电压11次谐波"/>
+        <result property="V_Harmonic_C_sum" column="C相电压谐波"/>
+        <result property="A_Harmonic_A_3" column="A相电流3次谐波"/>
+        <result property="A_Harmonic_A_5" column="A相电流5次谐波"/>
+        <result property="A_Harmonic_A_7" column="A相电流7次谐波"/>
+        <result property="A_Harmonic_A_9" column="A相电流9次谐波"/>
+        <result property="A_Harmonic_A_11" column="A相电流11次谐波"/>
+        <result property="A_Harmonic_A_sum" column="A相电流谐波"/>
+        <result property="A_Harmonic_B_3" column="B相电流3次谐波"/>
+        <result property="A_Harmonic_B_5" column="B相电流5次谐波"/>
+        <result property="A_Harmonic_B_7" column="B相电流7次谐波"/>
+        <result property="A_Harmonic_B_9" column="B相电流9次谐波"/>
+        <result property="A_Harmonic_B_11" column="B相电流11次谐波"/>
+        <result property="A_Harmonic_B_sum" column="B相电流谐波"/>
+        <result property="A_Harmonic_C_3" column="C相电流3次谐波"/>
+        <result property="A_Harmonic_C_5" column="C相电流5次谐波"/>
+        <result property="A_Harmonic_C_7" column="C相电流7次谐波"/>
+        <result property="A_Harmonic_C_9" column="C相电流9次谐波"/>
+        <result property="A_Harmonic_C_11" column="C相电流11次谐波"/>
+        <result property="A_Harmonic_C_sum" column="C相电流谐波"/>
+        <result property="gridFrequency" column="电网频率"/>
+    </resultMap>
+
+
+    <resultMap id="RealDataHisMap" type="com.benliu.entity.RealData">
+        <result property="repoTime" column="上报时间"/>
+        <result property="voltage_A" column="A相电压"/>
+        <result property="voltage_B" column="B相电压"/>
+        <result property="voltage_C" column="C相电压"/>
+        <result property="current_A" column="A相电流"/>
+        <result property="current_B" column="B相电流"/>
+        <result property="current_C" column="C相电流"/>
+        <result property="reactivePower_A" column="A相无功功率"/>
+        <result property="reactivePower_B" column="B相无功功率"/>
+        <result property="reactivePower_C" column="C相无功功率"/>
+        <result property="reactivePower_sum" column="总无功功率"/>
+        <result property="activePower_A" column="A相有功功率"/>
+        <result property="activePower_B" column="B相有功功率"/>
+        <result property="activePower_C" column="C相有功功率"/>
+        <result property="activePower_sum" column="总有功功率"/>
+        <result property="powerFactor_A" column="A相功率因数"/>
+        <result property="powerFactor_B" column="B相功率因数"/>
+        <result property="powerFactor_C" column="C相功率因数"/>
+        <result property="powerFactor_sum" column="总功率因数"/>
+        <result property="apparentPower_A" column="A相视在功率"/>
+        <result property="apparentPower_B" column="B相视在功率"/>
+        <result property="apparentPower_C" column="C相视在功率"/>
+        <result property="apparentPower_sum" column="总视在功率"/>
+
+    </resultMap>
+
+
+    <select id="getRDList" parameterType="Map" resultMap="RealDataMap">
+        SELECT  [上报时间] ,
+                <if test="queryData==1">
+                Convert(decimal(18,2),SUM([A相电压])/COUNT([上报时间]))AS[A相电压],
+                Convert(decimal(18,2),SUM([B相电压])/COUNT([上报时间]))AS[B相电压],
+                Convert(decimal(18,2),SUM([C相电压])/COUNT([上报时间]))AS[C相电压]
+                </if>
+                <if test="queryData==2">
+                Convert(decimal(18,2),SUM([A相电流])/COUNT([上报时间]))AS[A相电流],
+                Convert(decimal(18,2),SUM([B相电流])/COUNT([上报时间]))AS[B相电流],
+                Convert(decimal(18,2),SUM([C相电流])/COUNT([上报时间]))AS[C相电流]
+                </if>
+                <if test="queryData==5">
+                Convert(decimal(18,2),SUM([总功率因数])/COUNT([上报时间]))AS[总功率因数],
+                Convert(decimal(18,2),SUM([A相功率因数])/COUNT([上报时间]))AS[A相功率因数],
+                Convert(decimal(18,2),SUM([B相功率因数])/COUNT([上报时间]))AS[B相功率因数],
+                Convert(decimal(18,2),SUM([C相功率因数])/COUNT([上报时间]))AS[C相功率因数]
+                </if>
+                <if test="queryData==6">
+                Convert(decimal(18,2),SUM([总视在功率])/COUNT([上报时间]))AS[总视在功率],
+                Convert(decimal(18,2),SUM([A相视在功率])/COUNT([上报时间]))AS[A相视在功率],
+                Convert(decimal(18,2),SUM([B相视在功率])/COUNT([上报时间]))AS[B相视在功率],
+                Convert(decimal(18,2),SUM([C相视在功率])/COUNT([上报时间]))AS[C相视在功率]
+                </if>
+                <if test="queryData==4">
+                Convert(decimal(18,2),SUM([总有功功率])/COUNT([上报时间]))AS[总有功功率],
+                Convert(decimal(18,2),SUM([A相有功功率])/COUNT([上报时间]))AS[A相有功功率],
+                Convert(decimal(18,2),SUM([B相有功功率])/COUNT([上报时间]))AS[B相有功功率],
+                Convert(decimal(18,2),SUM([C相有功功率])/COUNT([上报时间]))AS[C相有功功率]
+                </if>
+                <if test="queryData==3">
+                Convert(decimal(18,2),SUM([总无功功率])/COUNT([上报时间]))AS[总无功功率],
+                Convert(decimal(18,2),SUM([A相无功功率])/COUNT([上报时间]))AS[A相无功功率],
+                Convert(decimal(18,2),SUM([B相无功功率])/COUNT([上报时间]))AS[B相无功功率],
+                Convert(decimal(18,2),SUM([C相无功功率])/COUNT([上报时间]))AS[C相无功功率]
+                </if>
+                <if test="queryData==71">
+                Convert(decimal(18,2),SUM([A相电压谐波])/COUNT([上报时间]))AS[A相电压谐波],
+                Convert(decimal(18,2),SUM([A相电压3次谐波])/COUNT([上报时间]))AS[A相电压3次谐波],
+                Convert(decimal(18,2),SUM([A相电压5次谐波])/COUNT([上报时间]))AS[A相电压5次谐波],
+                Convert(decimal(18,2),SUM([A相电压7次谐波])/COUNT([上报时间]))AS[A相电压7次谐波],
+                Convert(decimal(18,2),SUM([A相电压9次谐波])/COUNT([上报时间]))AS[A相电压9次谐波],
+                Convert(decimal(18,2),SUM([A相电压11次谐波])/COUNT([上报时间]))AS[A相电压11次谐波]
+                </if>
+                <if test="queryData==72">
+                Convert(decimal(18,2),SUM([B相电压谐波])/COUNT([上报时间]))AS[B相电压谐波],
+                Convert(decimal(18,2),SUM([B相电压3次谐波])/COUNT([上报时间]))AS[B相电压3次谐波],
+                Convert(decimal(18,2),SUM([B相电压5次谐波])/COUNT([上报时间]))AS[B相电压5次谐波],
+                Convert(decimal(18,2),SUM([B相电压7次谐波])/COUNT([上报时间]))AS[B相电压7次谐波],
+                Convert(decimal(18,2),SUM([B相电压9次谐波])/COUNT([上报时间]))AS[B相电压9次谐波],
+                Convert(decimal(18,2),SUM([B相电压11次谐波])/COUNT([上报时间]))AS[B相电压11次谐波]
+                </if>
+                <if test="queryData==73">
+                Convert(decimal(18,2),SUM([C相电压谐波])/COUNT([上报时间]))AS[C相电压谐波],
+                Convert(decimal(18,2),SUM([C相电压3次谐波])/COUNT([上报时间]))AS[C相电压3次谐波],
+                Convert(decimal(18,2),SUM([C相电压5次谐波])/COUNT([上报时间]))AS[C相电压5次谐波],
+                Convert(decimal(18,2),SUM([C相电压7次谐波])/COUNT([上报时间]))AS[C相电压7次谐波],
+                Convert(decimal(18,2),SUM([C相电压9次谐波])/COUNT([上报时间]))AS[C相电压9次谐波],
+                Convert(decimal(18,2),SUM([C相电压11次谐波])/COUNT([上报时间]))AS[C相电压11次谐波]
+                </if>
+                <if test="queryData==81">
+                Convert(decimal(18,2),SUM([A相电流谐波])/COUNT([上报时间]))AS[A相电流谐波],
+                Convert(decimal(18,2),SUM([A相电流3次谐波])/COUNT([上报时间]))AS[A相电流3次谐波],
+                Convert(decimal(18,2),SUM([A相电流5次谐波])/COUNT([上报时间]))AS[A相电流5次谐波],
+                Convert(decimal(18,2),SUM([A相电流7次谐波])/COUNT([上报时间]))AS[A相电流7次谐波],
+                Convert(decimal(18,2),SUM([A相电流9次谐波])/COUNT([上报时间]))AS[A相电流9次谐波],
+                Convert(decimal(18,2),SUM([A相电流11次谐波])/COUNT([上报时间]))AS[A相电流11次谐波]
+                </if>
+                <if test="queryData==82">
+                Convert(decimal(18,2),SUM([B相电流谐波])/COUNT([上报时间]))AS[B相电流谐波],
+                Convert(decimal(18,2),SUM([B相电流3次谐波])/COUNT([上报时间]))AS[B相电流3次谐波],
+                Convert(decimal(18,2),SUM([B相电流5次谐波])/COUNT([上报时间]))AS[B相电流5次谐波],
+                Convert(decimal(18,2),SUM([B相电流7次谐波])/COUNT([上报时间]))AS[B相电流7次谐波],
+                Convert(decimal(18,2),SUM([B相电流9次谐波])/COUNT([上报时间]))AS[B相电流9次谐波],
+                Convert(decimal(18,2),SUM([B相电流11次谐波])/COUNT([上报时间]))AS[B相电流11次谐波]
+                </if>
+                <if test="queryData==83">
+                Convert(decimal(18,2),SUM([C相电流谐波])/COUNT([上报时间]))AS[C相电流谐波],
+                Convert(decimal(18,2),SUM([C相电流3次谐波])/COUNT([上报时间]))AS[C相电流3次谐波],
+                Convert(decimal(18,2),SUM([C相电流5次谐波])/COUNT([上报时间]))AS[C相电流5次谐波],
+                Convert(decimal(18,2),SUM([C相电流7次谐波])/COUNT([上报时间]))AS[C相电流7次谐波],
+                Convert(decimal(18,2),SUM([C相电流9次谐波])/COUNT([上报时间]))AS[C相电流9次谐波],
+                Convert(decimal(18,2),SUM([C相电流11次谐波])/COUNT([上报时间]))AS[C相电流11次谐波]
+                </if>
+                ,Convert(decimal(18,2),SUM([电网频率])/COUNT([上报时间]))AS[电网频率]
+        FROM [实时数据]
+        WHERE [通信机ID]=#{machineId} AND ([上报时间] BETWEEN #{dateBegin} AND #{dateEnd})
+        GROUP BY [上报时间]
+        ORDER BY [上报时间]  ASC
+    </select>
+    
+    <select id="getLastTenRD" parameterType="String" resultMap="RealDataMap">
+        SELECT TOP 10 [上报时间] ,
+                <if test="queryData==1 ">
+                    Convert(decimal(18,2),SUM([A相电压])/COUNT([上报时间]))AS[A相电压],
+                    Convert(decimal(18,2),SUM([B相电压])/COUNT([上报时间]))AS[B相电压],
+                    Convert(decimal(18,2),SUM([C相电压])/COUNT([上报时间]))AS[C相电压]
+                </if>
+                <if test="queryData==2">
+                    Convert(decimal(18,2),SUM([A相电流])/COUNT([上报时间]))AS[A相电流],
+                    Convert(decimal(18,2),SUM([B相电流])/COUNT([上报时间]))AS[B相电流],
+                    Convert(decimal(18,2),SUM([C相电流])/COUNT([上报时间]))AS[C相电流]
+                </if>
+                <if test="queryData==5">
+                    Convert(decimal(18,2),SUM([总功率因数])/COUNT([上报时间]))AS[总功率因数],
+                    Convert(decimal(18,2),SUM([A相功率因数])/COUNT([上报时间]))AS[A相功率因数],
+                    Convert(decimal(18,2),SUM([B相功率因数])/COUNT([上报时间]))AS[B相功率因数],
+                    Convert(decimal(18,2),SUM([C相功率因数])/COUNT([上报时间]))AS[C相功率因数]
+                </if>
+                <if test="queryData==6">
+                    Convert(decimal(18,2),SUM([总视在功率])/COUNT([上报时间]))AS[总视在功率],
+                    Convert(decimal(18,2),SUM([A相视在功率])/COUNT([上报时间]))AS[A相视在功率],
+                    Convert(decimal(18,2),SUM([B相视在功率])/COUNT([上报时间]))AS[B相视在功率],
+                    Convert(decimal(18,2),SUM([C相视在功率])/COUNT([上报时间]))AS[C相视在功率]
+                </if>
+                <if test="queryData==4">
+                    Convert(decimal(18,2),SUM([总有功功率])/COUNT([上报时间]))AS[总有功功率],
+                    Convert(decimal(18,2),SUM([A相有功功率])/COUNT([上报时间]))AS[A相有功功率],
+                    Convert(decimal(18,2),SUM([B相有功功率])/COUNT([上报时间]))AS[B相有功功率],
+                    Convert(decimal(18,2),SUM([C相有功功率])/COUNT([上报时间]))AS[C相有功功率]
+                </if>
+                <if test="queryData==3">
+                    Convert(decimal(18,2),SUM([总无功功率])/COUNT([上报时间]))AS[总无功功率],
+                    Convert(decimal(18,2),SUM([A相无功功率])/COUNT([上报时间]))AS[A相无功功率],
+                    Convert(decimal(18,2),SUM([B相无功功率])/COUNT([上报时间]))AS[B相无功功率],
+                    Convert(decimal(18,2),SUM([C相无功功率])/COUNT([上报时间]))AS[C相无功功率]
+                </if>
+                <if test="queryData==71">
+                    Convert(decimal(18,2),SUM([A相电压谐波])/COUNT([上报时间]))AS[A相电压谐波],
+                    Convert(decimal(18,2),SUM([A相电压3次谐波])/COUNT([上报时间]))AS[A相电压3次谐波],
+                    Convert(decimal(18,2),SUM([A相电压5次谐波])/COUNT([上报时间]))AS[A相电压5次谐波],
+                    Convert(decimal(18,2),SUM([A相电压7次谐波])/COUNT([上报时间]))AS[A相电压7次谐波],
+                    Convert(decimal(18,2),SUM([A相电压9次谐波])/COUNT([上报时间]))AS[A相电压9次谐波],
+                    Convert(decimal(18,2),SUM([A相电压11次谐波])/COUNT([上报时间]))AS[A相电压11次谐波]
+                </if>
+                <if test="queryData==72">
+                    Convert(decimal(18,2),SUM([B相电压谐波])/COUNT([上报时间]))AS[B相电压谐波],
+                    Convert(decimal(18,2),SUM([B相电压3次谐波])/COUNT([上报时间]))AS[B相电压3次谐波],
+                    Convert(decimal(18,2),SUM([B相电压5次谐波])/COUNT([上报时间]))AS[B相电压5次谐波],
+                    Convert(decimal(18,2),SUM([B相电压7次谐波])/COUNT([上报时间]))AS[B相电压7次谐波],
+                    Convert(decimal(18,2),SUM([B相电压9次谐波])/COUNT([上报时间]))AS[B相电压9次谐波],
+                    Convert(decimal(18,2),SUM([B相电压11次谐波])/COUNT([上报时间]))AS[B相电压11次谐波]
+                </if>
+                <if test="queryData==73">
+                    Convert(decimal(18,2),SUM([C相电压谐波])/COUNT([上报时间]))AS[C相电压谐波],
+                    Convert(decimal(18,2),SUM([C相电压3次谐波])/COUNT([上报时间]))AS[C相电压3次谐波],Convert(decimal(18,2),SUM([C相电压5次谐波])/COUNT([上报时间]))AS[C相电压5次谐波],
+                    Convert(decimal(18,2),SUM([C相电压7次谐波])/COUNT([上报时间]))AS[C相电压7次谐波],
+                    Convert(decimal(18,2),SUM([C相电压9次谐波])/COUNT([上报时间]))AS[C相电压9次谐波],Convert(decimal(18,2),SUM([C相电压11次谐波])/COUNT([上报时间]))AS[C相电压11次谐波]
+                </if>
+                <if test="queryData==81">
+                    Convert(decimal(18,2),SUM([A相电流谐波])/COUNT([上报时间]))AS[A相电流谐波],
+                    Convert(decimal(18,2),SUM([A相电流3次谐波])/COUNT([上报时间]))AS[A相电流3次谐波],Convert(decimal(18,2),SUM([A相电流5次谐波])/COUNT([上报时间]))AS[A相电流5次谐波],
+                    Convert(decimal(18,2),SUM([A相电流7次谐波])/COUNT([上报时间]))AS[A相电流7次谐波],
+                    Convert(decimal(18,2),SUM([A相电流9次谐波])/COUNT([上报时间]))AS[A相电流9次谐波],Convert(decimal(18,2),SUM([A相电流11次谐波])/COUNT([上报时间]))AS[A相电流11次谐波]
+                </if>
+                <if test="queryData==82">
+                    Convert(decimal(18,2),SUM([B相电流谐波])/COUNT([上报时间]))AS[B相电流谐波],
+                    Convert(decimal(18,2),SUM([B相电流3次谐波])/COUNT([上报时间]))AS[B相电流3次谐波],
+                    Convert(decimal(18,2),SUM([B相电流5次谐波])/COUNT([上报时间]))AS[B相电流5次谐波],
+                    Convert(decimal(18,2),SUM([B相电流7次谐波])/COUNT([上报时间]))AS[B相电流7次谐波],
+                    Convert(decimal(18,2),SUM([B相电流9次谐波])/COUNT([上报时间]))AS[B相电流9次谐波],
+                    Convert(decimal(18,2),SUM([B相电流11次谐波])/COUNT([上报时间]))AS[B相电流11次谐波]
+                </if>
+                <if test="queryData==83">
+                    Convert(decimal(18,2),SUM([C相电流谐波])/COUNT([上报时间]))AS[C相电流谐波],
+                    Convert(decimal(18,2),SUM([C相电流3次谐波])/COUNT([上报时间]))AS[C相电流3次谐波],
+                    Convert(decimal(18,2),SUM([C相电流5次谐波])/COUNT([上报时间]))AS[C相电流5次谐波],
+                    Convert(decimal(18,2),SUM([C相电流7次谐波])/COUNT([上报时间]))AS[C相电流7次谐波],
+                    Convert(decimal(18,2),SUM([C相电流9次谐波])/COUNT([上报时间]))AS[C相电流9次谐波],
+                    Convert(decimal(18,2),SUM([C相电流11次谐波])/COUNT([上报时间]))AS[C相电流11次谐波]
+                </if>
+                ,Convert(decimal(18,2),SUM([电网频率])/COUNT([上报时间]))AS[电网频率]
+        FROM [实时数据]
+        WHERE [通信机ID]=#{machineId}
+        GROUP BY [上报时间]
+        ORDER BY [上报时间] DESC
+    </select>
+
+
+
+    <select id="getRDListHis" parameterType="Map" resultMap="RealDataHisMap">
+        SELECT  [上报时间] ,
+        <if test="queryData==1">
+            Convert(decimal(18,2),SUM([A相电压])/COUNT([上报时间]))AS[A相电压],
+            Convert(decimal(18,2),SUM([B相电压])/COUNT([上报时间]))AS[B相电压],
+            Convert(decimal(18,2),SUM([C相电压])/COUNT([上报时间]))AS[C相电压]
+        </if>
+        <if test="queryData==2">
+            Convert(decimal(18,2),SUM([A相电流])/COUNT([上报时间]))AS[A相电流],
+            Convert(decimal(18,2),SUM([B相电流])/COUNT([上报时间]))AS[B相电流],
+            Convert(decimal(18,2),SUM([C相电流])/COUNT([上报时间]))AS[C相电流]
+        </if>
+        <if test="queryData==5">
+            Convert(decimal(18,2),SUM([总功率因数])/COUNT([上报时间]))AS[总功率因数],
+            Convert(decimal(18,2),SUM([A相功率因数])/COUNT([上报时间]))AS[A相功率因数],
+            Convert(decimal(18,2),SUM([B相功率因数])/COUNT([上报时间]))AS[B相功率因数],
+            Convert(decimal(18,2),SUM([C相功率因数])/COUNT([上报时间]))AS[C相功率因数]
+        </if>
+        <if test="queryData==6">
+            Convert(decimal(18,2),SUM([总视在功率])/COUNT([上报时间]))AS[总视在功率],
+            Convert(decimal(18,2),SUM([A相视在功率])/COUNT([上报时间]))AS[A相视在功率],
+            Convert(decimal(18,2),SUM([B相视在功率])/COUNT([上报时间]))AS[B相视在功率],
+            Convert(decimal(18,2),SUM([C相视在功率])/COUNT([上报时间]))AS[C相视在功率]
+        </if>
+        <if test="queryData==4">
+            Convert(decimal(18,2),SUM([总有功功率])/COUNT([上报时间]))AS[总有功功率],
+            Convert(decimal(18,2),SUM([A相有功功率])/COUNT([上报时间]))AS[A相有功功率],
+            Convert(decimal(18,2),SUM([B相有功功率])/COUNT([上报时间]))AS[B相有功功率],
+            Convert(decimal(18,2),SUM([C相有功功率])/COUNT([上报时间]))AS[C相有功功率]
+        </if>
+        <if test="queryData==3">
+            Convert(decimal(18,2),SUM([总无功功率])/COUNT([上报时间]))AS[总无功功率],
+            Convert(decimal(18,2),SUM([A相无功功率])/COUNT([上报时间]))AS[A相无功功率],
+            Convert(decimal(18,2),SUM([B相无功功率])/COUNT([上报时间]))AS[B相无功功率],
+            Convert(decimal(18,2),SUM([C相无功功率])/COUNT([上报时间]))AS[C相无功功率]
+        </if>
+        <if test="queryData==71">
+            Convert(decimal(18,2),SUM([A相电压谐波])/COUNT([上报时间]))AS[A相电压谐波],
+            Convert(decimal(18,2),SUM([A相电压3次谐波])/COUNT([上报时间]))AS[A相电压3次谐波],
+            Convert(decimal(18,2),SUM([A相电压5次谐波])/COUNT([上报时间]))AS[A相电压5次谐波],
+            Convert(decimal(18,2),SUM([A相电压7次谐波])/COUNT([上报时间]))AS[A相电压7次谐波],
+            Convert(decimal(18,2),SUM([A相电压9次谐波])/COUNT([上报时间]))AS[A相电压9次谐波],
+            Convert(decimal(18,2),SUM([A相电压11次谐波])/COUNT([上报时间]))AS[A相电压11次谐波]
+        </if>
+        <if test="queryData==72">
+            Convert(decimal(18,2),SUM([B相电压谐波])/COUNT([上报时间]))AS[B相电压谐波],
+            Convert(decimal(18,2),SUM([B相电压3次谐波])/COUNT([上报时间]))AS[B相电压3次谐波],
+            Convert(decimal(18,2),SUM([B相电压5次谐波])/COUNT([上报时间]))AS[B相电压5次谐波],
+            Convert(decimal(18,2),SUM([B相电压7次谐波])/COUNT([上报时间]))AS[B相电压7次谐波],
+            Convert(decimal(18,2),SUM([B相电压9次谐波])/COUNT([上报时间]))AS[B相电压9次谐波],
+            Convert(decimal(18,2),SUM([B相电压11次谐波])/COUNT([上报时间]))AS[B相电压11次谐波]
+        </if>
+        <if test="queryData==73">
+            Convert(decimal(18,2),SUM([C相电压谐波])/COUNT([上报时间]))AS[C相电压谐波],
+            Convert(decimal(18,2),SUM([C相电压3次谐波])/COUNT([上报时间]))AS[C相电压3次谐波],
+            Convert(decimal(18,2),SUM([C相电压5次谐波])/COUNT([上报时间]))AS[C相电压5次谐波],
+            Convert(decimal(18,2),SUM([C相电压7次谐波])/COUNT([上报时间]))AS[C相电压7次谐波],
+            Convert(decimal(18,2),SUM([C相电压9次谐波])/COUNT([上报时间]))AS[C相电压9次谐波],
+            Convert(decimal(18,2),SUM([C相电压11次谐波])/COUNT([上报时间]))AS[C相电压11次谐波]
+        </if>
+        <if test="queryData==81">
+            Convert(decimal(18,2),SUM([A相电流谐波])/COUNT([上报时间]))AS[A相电流谐波],
+            Convert(decimal(18,2),SUM([A相电流3次谐波])/COUNT([上报时间]))AS[A相电流3次谐波],
+            Convert(decimal(18,2),SUM([A相电流5次谐波])/COUNT([上报时间]))AS[A相电流5次谐波],
+            Convert(decimal(18,2),SUM([A相电流7次谐波])/COUNT([上报时间]))AS[A相电流7次谐波],
+            Convert(decimal(18,2),SUM([A相电流9次谐波])/COUNT([上报时间]))AS[A相电流9次谐波],
+            Convert(decimal(18,2),SUM([A相电流11次谐波])/COUNT([上报时间]))AS[A相电流11次谐波]
+        </if>
+        <if test="queryData==82">
+            Convert(decimal(18,2),SUM([B相电流谐波])/COUNT([上报时间]))AS[B相电流谐波],
+            Convert(decimal(18,2),SUM([B相电流3次谐波])/COUNT([上报时间]))AS[B相电流3次谐波],
+            Convert(decimal(18,2),SUM([B相电流5次谐波])/COUNT([上报时间]))AS[B相电流5次谐波],
+            Convert(decimal(18,2),SUM([B相电流7次谐波])/COUNT([上报时间]))AS[B相电流7次谐波],
+            Convert(decimal(18,2),SUM([B相电流9次谐波])/COUNT([上报时间]))AS[B相电流9次谐波],
+            Convert(decimal(18,2),SUM([B相电流11次谐波])/COUNT([上报时间]))AS[B相电流11次谐波]
+        </if>
+        <if test="queryData==83">
+            Convert(decimal(18,2),SUM([C相电流谐波])/COUNT([上报时间]))AS[C相电流谐波],
+            Convert(decimal(18,2),SUM([C相电流3次谐波])/COUNT([上报时间]))AS[C相电流3次谐波],
+            Convert(decimal(18,2),SUM([C相电流5次谐波])/COUNT([上报时间]))AS[C相电流5次谐波],
+            Convert(decimal(18,2),SUM([C相电流7次谐波])/COUNT([上报时间]))AS[C相电流7次谐波],
+            Convert(decimal(18,2),SUM([C相电流9次谐波])/COUNT([上报时间]))AS[C相电流9次谐波],
+            Convert(decimal(18,2),SUM([C相电流11次谐波])/COUNT([上报时间]))AS[C相电流11次谐波]
+        </if>
+        ,Convert(decimal(18,2),SUM([电网频率])/COUNT([上报时间]))AS[电网频率]
+        FROM [调压器数据]
+        WHERE [通信机ID]=#{machineId} AND ([上报时间] BETWEEN #{dateBegin} AND #{dateEnd})
+        GROUP BY [上报时间]
+        ORDER BY [上报时间]  ASC
+    </select>
+
+    <select id="getLastTenRDHis" parameterType="String" resultMap="RealDataHisMap">
+        SELECT TOP 10 [上报时间] ,
+        <if test="queryData==1 ">
+            Convert(decimal(18,2),SUM([A相电压])/COUNT([上报时间]))AS[A相电压],
+            Convert(decimal(18,2),SUM([B相电压])/COUNT([上报时间]))AS[B相电压],
+            Convert(decimal(18,2),SUM([C相电压])/COUNT([上报时间]))AS[C相电压]
+        </if>
+        <if test="queryData==2">
+            Convert(decimal(18,2),SUM([A相电流])/COUNT([上报时间]))AS[A相电流],
+            Convert(decimal(18,2),SUM([B相电流])/COUNT([上报时间]))AS[B相电流],
+            Convert(decimal(18,2),SUM([C相电流])/COUNT([上报时间]))AS[C相电流]
+        </if>
+        <if test="queryData==5">
+            Convert(decimal(18,2),SUM([总功率因数])/COUNT([上报时间]))AS[总功率因数],
+            Convert(decimal(18,2),SUM([A相功率因数])/COUNT([上报时间]))AS[A相功率因数],
+            Convert(decimal(18,2),SUM([B相功率因数])/COUNT([上报时间]))AS[B相功率因数],
+            Convert(decimal(18,2),SUM([C相功率因数])/COUNT([上报时间]))AS[C相功率因数]
+        </if>
+        <if test="queryData==6">
+            Convert(decimal(18,2),SUM([总视在功率])/COUNT([上报时间]))AS[总视在功率],
+            Convert(decimal(18,2),SUM([A相视在功率])/COUNT([上报时间]))AS[A相视在功率],
+            Convert(decimal(18,2),SUM([B相视在功率])/COUNT([上报时间]))AS[B相视在功率],
+            Convert(decimal(18,2),SUM([C相视在功率])/COUNT([上报时间]))AS[C相视在功率]
+        </if>
+        <if test="queryData==4">
+            Convert(decimal(18,2),SUM([总有功功率])/COUNT([上报时间]))AS[总有功功率],
+            Convert(decimal(18,2),SUM([A相有功功率])/COUNT([上报时间]))AS[A相有功功率],
+            Convert(decimal(18,2),SUM([B相有功功率])/COUNT([上报时间]))AS[B相有功功率],
+            Convert(decimal(18,2),SUM([C相有功功率])/COUNT([上报时间]))AS[C相有功功率]
+        </if>
+        <if test="queryData==3">
+            Convert(decimal(18,2),SUM([总无功功率])/COUNT([上报时间]))AS[总无功功率],
+            Convert(decimal(18,2),SUM([A相无功功率])/COUNT([上报时间]))AS[A相无功功率],
+            Convert(decimal(18,2),SUM([B相无功功率])/COUNT([上报时间]))AS[B相无功功率],
+            Convert(decimal(18,2),SUM([C相无功功率])/COUNT([上报时间]))AS[C相无功功率]
+        </if>
+        <if test="queryData==71">
+            Convert(decimal(18,2),SUM([A相电压谐波])/COUNT([上报时间]))AS[A相电压谐波],
+            Convert(decimal(18,2),SUM([A相电压3次谐波])/COUNT([上报时间]))AS[A相电压3次谐波],
+            Convert(decimal(18,2),SUM([A相电压5次谐波])/COUNT([上报时间]))AS[A相电压5次谐波],
+            Convert(decimal(18,2),SUM([A相电压7次谐波])/COUNT([上报时间]))AS[A相电压7次谐波],
+            Convert(decimal(18,2),SUM([A相电压9次谐波])/COUNT([上报时间]))AS[A相电压9次谐波],
+            Convert(decimal(18,2),SUM([A相电压11次谐波])/COUNT([上报时间]))AS[A相电压11次谐波]
+        </if>
+        <if test="queryData==72">
+            Convert(decimal(18,2),SUM([B相电压谐波])/COUNT([上报时间]))AS[B相电压谐波],
+            Convert(decimal(18,2),SUM([B相电压3次谐波])/COUNT([上报时间]))AS[B相电压3次谐波],
+            Convert(decimal(18,2),SUM([B相电压5次谐波])/COUNT([上报时间]))AS[B相电压5次谐波],
+            Convert(decimal(18,2),SUM([B相电压7次谐波])/COUNT([上报时间]))AS[B相电压7次谐波],
+            Convert(decimal(18,2),SUM([B相电压9次谐波])/COUNT([上报时间]))AS[B相电压9次谐波],
+            Convert(decimal(18,2),SUM([B相电压11次谐波])/COUNT([上报时间]))AS[B相电压11次谐波]
+        </if>
+        <if test="queryData==73">
+            Convert(decimal(18,2),SUM([C相电压谐波])/COUNT([上报时间]))AS[C相电压谐波],
+            Convert(decimal(18,2),SUM([C相电压3次谐波])/COUNT([上报时间]))AS[C相电压3次谐波],Convert(decimal(18,2),SUM([C相电压5次谐波])/COUNT([上报时间]))AS[C相电压5次谐波],
+            Convert(decimal(18,2),SUM([C相电压7次谐波])/COUNT([上报时间]))AS[C相电压7次谐波],
+            Convert(decimal(18,2),SUM([C相电压9次谐波])/COUNT([上报时间]))AS[C相电压9次谐波],Convert(decimal(18,2),SUM([C相电压11次谐波])/COUNT([上报时间]))AS[C相电压11次谐波]
+        </if>
+        <if test="queryData==81">
+            Convert(decimal(18,2),SUM([A相电流谐波])/COUNT([上报时间]))AS[A相电流谐波],
+            Convert(decimal(18,2),SUM([A相电流3次谐波])/COUNT([上报时间]))AS[A相电流3次谐波],Convert(decimal(18,2),SUM([A相电流5次谐波])/COUNT([上报时间]))AS[A相电流5次谐波],
+            Convert(decimal(18,2),SUM([A相电流7次谐波])/COUNT([上报时间]))AS[A相电流7次谐波],
+            Convert(decimal(18,2),SUM([A相电流9次谐波])/COUNT([上报时间]))AS[A相电流9次谐波],Convert(decimal(18,2),SUM([A相电流11次谐波])/COUNT([上报时间]))AS[A相电流11次谐波]
+        </if>
+        <if test="queryData==82">
+            Convert(decimal(18,2),SUM([B相电流谐波])/COUNT([上报时间]))AS[B相电流谐波],
+            Convert(decimal(18,2),SUM([B相电流3次谐波])/COUNT([上报时间]))AS[B相电流3次谐波],
+            Convert(decimal(18,2),SUM([B相电流5次谐波])/COUNT([上报时间]))AS[B相电流5次谐波],
+            Convert(decimal(18,2),SUM([B相电流7次谐波])/COUNT([上报时间]))AS[B相电流7次谐波],
+            Convert(decimal(18,2),SUM([B相电流9次谐波])/COUNT([上报时间]))AS[B相电流9次谐波],
+            Convert(decimal(18,2),SUM([B相电流11次谐波])/COUNT([上报时间]))AS[B相电流11次谐波]
+        </if>
+        <if test="queryData==83">
+            Convert(decimal(18,2),SUM([C相电流谐波])/COUNT([上报时间]))AS[C相电流谐波],
+            Convert(decimal(18,2),SUM([C相电流3次谐波])/COUNT([上报时间]))AS[C相电流3次谐波],
+            Convert(decimal(18,2),SUM([C相电流5次谐波])/COUNT([上报时间]))AS[C相电流5次谐波],
+            Convert(decimal(18,2),SUM([C相电流7次谐波])/COUNT([上报时间]))AS[C相电流7次谐波],
+            Convert(decimal(18,2),SUM([C相电流9次谐波])/COUNT([上报时间]))AS[C相电流9次谐波],
+            Convert(decimal(18,2),SUM([C相电流11次谐波])/COUNT([上报时间]))AS[C相电流11次谐波]
+        </if>
+        ,Convert(decimal(18,2),SUM([电网频率])/COUNT([上报时间]))AS[电网频率]
+        FROM [调压器数据]
+        WHERE [通信机ID]=#{machineId}
+        GROUP BY [上报时间]
+        ORDER BY [上报时间] DESC
+    </select>
+
+</mapper>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.benliu.mapper.ADMapper">
+
+    <resultMap id="VoltageMap" type="com.benliu.entity.AnalysisData">
+        <result property="data_A" column="A相输入电压"/>
+        <result property="data_B" column="B相输入电压"/>
+        <result property="data_C" column="C相输入电压"/>
+        <result property="data_A_Append" column="A相输出电压"/>
+        <result property="data_B_Append" column="B相输出电压"/>
+        <result property="data_C_Append" column="C相输出电压"/>
+        <result property="dateTime" column="上报时间"/>
+    </resultMap>
+
+    <resultMap id="CurrentMap" type="com.benliu.entity.AnalysisData">
+        <result property="data_A" column="A相输入电流"/>
+        <result property="data_B" column="B相输入电流"/>
+        <result property="data_C" column="C相输入电流"/>
+        <result property="data_A_Append" column="A相输出电流"/>
+        <result property="data_B_Append" column="B相输出电流"/>
+        <result property="data_C_Append" column="C相输出电流"/>
+        <result property="dateTime" column="上报时间"/>
+    </resultMap>
+
+    <resultMap id="PowerFactorMap" type="com.benliu.entity.AnalysisData">
+        <result property="data_A" column="A相功率因数"/>
+        <result property="data_B" column="B相功率因数"/>
+        <result property="data_C" column="C相功率因数"/>
+        <result property="data_sum" column="总功率因数"/>
+        <result property="dateTime" column="上报时间"/>
+    </resultMap>
+
+    <resultMap id="ActivePowerMap" type="com.benliu.entity.AnalysisData">
+        <result property="data_A" column="A相有功功率"/>
+        <result property="data_B" column="B相有功功率"/>
+        <result property="data_C" column="C相有功功率"/>
+        <result property="data_sum" column="总有功功率"/>
+        <result property="dateTime" column="上报时间"/>
+    </resultMap>
+
+    <resultMap id="ReactivePowerMap" type="com.benliu.entity.AnalysisData">
+        <result property="data_A" column="A相无功功率"/>
+        <result property="data_B" column="B相无功功率"/>
+        <result property="data_C" column="C相无功功率"/>
+        <result property="data_sum" column="总无功功率"/>
+        <result property="dateTime" column="上报时间"/>
+    </resultMap>
+
+    <select id="getVoltage_RD" parameterType="String" resultMap="VoltageMap">
+        SELECT DISTINCT CONVERT(VARCHAR(100), A.[上报时间], 120) AS [上报时间],  
+        	A.[A相电压] AS [A相输入电压], A.[B相电压] AS [B相输入电压], A.[C相电压] AS [C相输入电压],
+        	B.[A相电压] AS [A相输出电压],B.[B相电压] AS [B相输出电压],B.[C相电压] AS [C相输出电压]
+        FROM [JstRpcms].[dbo].[实时数据] AS A 
+        LEFT JOIN [JstRpcms].[dbo].[调压器数据] AS B
+        ON A.[通信机ID]=B.[通信机ID] AND A.[上报时间]=B.[上报时间]
+        WHERE A.[通信机ID]=#{machineId} AND (A.[上报时间] BETWEEN  #{dateBegin} AND #{dateEnd})
+    </select>
+
+    <select id="getVoltage_RD_M"  resultMap="VoltageMap">
+        ;WITH TabDate(Dt)
+        AS
+        (
+            SELECT CAST(#{dateBegin} AS DATETIME)
+            UNION ALL
+            SELECT DATEADD(MINUTE,#{minutes},Dt) FROM TabDate WHERE #{dateEnd}>Dt
+        )
+         SELECT DISTINCT CONVERT(VARCHAR(100), A.[上报时间], 120) AS [上报时间], 
+         		A.A相电压 AS A相输入电压,A.B相电压 AS B相输入电压,A.C相电压 AS C相输入电压,
+				B.A相电压 AS A相输出电压,B.B相电压 AS B相输出电压,B.C相电压 AS C相输出电压
+        FROM TabDate AS T
+        INNER JOIN
+        [JstRpcms].[dbo].[实时数据] AS A ON A.上报时间= T.Dt AND A.[通信机ID]=#{machineId} AND A.[上报时间] BETWEEN CAST(#{dateBegin} AS DATETIME) AND CAST(#{dateEnd} AS DATETIME)
+        LEFT JOIN
+        [JstRpcms].[dbo].[调压器数据] AS B ON A.[上报时间]=B.[上报时间] and B.[通信机ID]=#{machineId} AND B.[上报时间] BETWEEN CAST(#{dateBegin} AS DATETIME) AND CAST(#{dateEnd} AS DATETIME)
+        OPTION(MAXRECURSION 0)
+    </select>
+
+    <select id="getCurrent_RD" parameterType="String" resultMap="CurrentMap">
+        SELECT CONVERT(VARCHAR(100), A.[上报时间], 120) AS [上报时间],
+        	A.[A相电流] AS A相输入电流,A.[B相电流]) AS B相输入电流,A.[C相电流] AS C相输入电流,
+        	B.[A相电流] AS A相输出电流,B.[B相电流]) AS B相输出电流,B.[C相电流] AS C相输出电流
+        FROM FROM [实时数据] AS A
+        LEFT JOIN [调压器数据] AS B 
+        ON A.[上报时间]=B.[上报时间]  AND A.[通信机ID]=#{machineId} AND (A.[上报时间] BETWEEN  #{dateBegin} AND #{dateEnd})
+    </select>
+
+    <select id="getCurrent_RD_M"  resultMap="CurrentMap">
+       ;WITH TabDate(Dt)
+        AS
+        (
+            SELECT CAST(#{dateBegin} AS DATETIME)
+            UNION ALL
+            SELECT DATEADD(MINUTE,#{minutes},Dt) FROM TabDate WHERE #{dateEnd}>Dt
+        )
+        SELECT DISTINCT CONVERT(VARCHAR(100), A.[上报时间], 120) AS [上报时间],
+        	A.[A相电流] AS A相输入电流,A.[B相电流] AS B相输入电流,A.[C相电流] AS C相输入电流,
+        	B.[A相电流] AS A相输出电流,B.[B相电流] AS B相输出电流,B.[C相电流] AS C相输出电流
+        FROM TabDate AS T
+        INNER JOIN [实时数据] AS A ON A.上报时间= T.Dt AND A.[通信机ID]=#{machineId} AND (A.[上报时间] BETWEEN  #{dateBegin} AND #{dateEnd})
+        LEFT JOIN [调压器数据] AS B ON A.[上报时间]=B.[上报时间] AND B.[通信机ID]=#{machineId} AND (B.[上报时间] BETWEEN  #{dateBegin} AND #{dateEnd})
+        OPTION(MAXRECURSION 0)
+    </select>
+
+    <select id="getPowerFactor_RD" parameterType="String" resultMap="PowerFactorMap">
+        SELECT  DISTINCT CONVERT(VARCHAR(100), [上报时间], 120) AS [上报时间],
+                CONVERT(decimal(18,4), [A相功率因数] AS [A相功率因数], 
+                CONVERT(decimal(18,4), [B相功率因数] AS [B相功率因数], 
+                CONVERT(decimal(18,4), [C相功率因数] AS [C相功率因数],  
+                CONVERT(decimal(18,4), [总功率因数]) AS [总功率因数]
+        FROM [实时数据]
+        WHERE [通信机ID]=#{machineId} AND ([上报时间] BETWEEN  #{dateBegin} AND #{dateEnd})
+    </select>
+    
+    <select id="getPowerFactor_RD_M"  resultMap="PowerFactorMap">
+        ;WITH TabDate(Dt)
+        AS
+        (
+            SELECT CAST(#{dateBegin} AS DATETIME)
+            UNION ALL
+            SELECT DATEADD(MINUTE,#{minutes},Dt) FROM TabDate WHERE #{dateEnd}>Dt
+        )
+        SELECT DISTINCT CONVERT(VARCHAR(100), A.[上报时间], 120) AS [上报时间],
+        	CONVERT(decimal(18,4), A.A相功率因数) AS [A相功率因数],
+        	CONVERT(decimal(18,4), A.B相功率因数) AS [B相功率因数],
+        	CONVERT(decimal(18,4), A.C相功率因数) AS [C相功率因数],
+        	CONVERT(decimal(18,4), A.总功率因数) AS [总功率因数]
+        FROM TabDate AS T
+        INNER JOIN [实时数据] AS A ON A.上报时间= T.Dt AND A.[通信机ID]=#{machineId} AND (A.[上报时间] BETWEEN  #{dateBegin} AND #{dateEnd})
+        OPTION(MAXRECURSION 0)
+    </select>
+
+    <select id="getActivePower_RD" parameterType="String" resultMap="ActivePowerMap">
+        SELECT DISTINCT CONVERT(VARCHAR(100), [上报时间], 120) AS [上报时间],
+                [A相有功功率], [B相有功功率], [C相有功功率], [总有功功率]
+        FROM [实时数据]
+        WHERE [通信机ID]=#{machineId} AND ([上报时间] BETWEEN  #{dateBegin} AND #{dateEnd})
+    </select>
+    
+    <select id="getActivePower_RD_M" resultMap="ActivePowerMap">
+        ;WITH TabDate(Dt)
+        AS
+        (
+            SELECT CAST(#{dateBegin} AS DATETIME)
+            UNION ALL
+            SELECT DATEADD(MINUTE,#{minutes},Dt) FROM TabDate WHERE #{dateEnd}>Dt
+        )
+        SELECT DISTINCT CONVERT(VARCHAR(100), A.[上报时间], 120) AS [上报时间],
+        	A.A相有功功率,A.B相有功功率,A.C相有功功率,A.总有功功率
+        FROM TabDate AS T
+        INNER JOIN [实时数据] AS A ON A.上报时间=T.Dt AND A.[通信机ID]=#{machineId} AND (A.[上报时间] BETWEEN  #{dateBegin} AND #{dateEnd})
+        OPTION(MAXRECURSION 0)
+    </select>
+
+    <select id="getReactivePower_RD" parameterType="String" resultMap="ReactivePowerMap">
+        SELECT DISTINCT  CONVERT(VARCHAR(100), [上报时间], 120) AS [上报时间],
+                [A相无功功率], [B相无功功率], [C相无功功率], [总无功功率]
+        FROM [实时数据]
+        WHERE [通信机ID]=#{machineId} AND ([上报时间] BETWEEN  #{dateBegin} AND #{dateEnd})
+    </select>
+
+    <select id="getReactivePower_RD_M" resultMap="ReactivePowerMap">
+        ;WITH TabDate(Dt)
+        AS
+        (
+            SELECT CAST(#{dateBegin} AS DATETIME)
+            UNION ALL
+            SELECT DATEADD(MINUTE,#{minutes},Dt) FROM TabDate WHERE #{dateEnd}>Dt
+        )
+        SELECT DISTINCT CONVERT(VARCHAR(100), A.[上报时间], 120) AS [上报时间],
+        	A.A相无功功率,A.B相无功功率,A.C相无功功率,A.总无功功率
+        FROM TabDate AS T
+        INNER JOIN [实时数据] AS A ON A.上报时间=T.Dt AND A.[通信机ID]=#{machineId} AND (A.[上报时间] BETWEEN  #{dateBegin} AND #{dateEnd})
+        OPTION(MAXRECURSION 0)
+    </select>
+    
+</mapper>

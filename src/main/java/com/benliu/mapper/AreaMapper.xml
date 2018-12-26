@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.benliu.mapper.AreaMapper">
+    <resultMap id="AreaMapper" type="com.benliu.entity.Area">
+        <result property="areaId" column="县区ID"/>
+        <result property="areaName" column="名称"/>
+        <result property="areaPlace" column="地址"/>
+        <result property="cityId" column="city_id"/>
+
+    </resultMap>
+    <select id="getAreasByCityId"  parameterType="int" resultMap="AreaMapper">
+         SELECT [县区ID],[名称],[地址],[city_id]
+         FROM [县区]
+         WHERE [city_id]=#{cityId}
+    </select>
+
+    <select id="getAreaById"  parameterType="int" resultMap="AreaMapper">
+        SELECT [县区ID],[名称],[地址],[city_id]
+        FROM [县区]
+        WHERE [县区ID]=#{areaId}
+    </select>
+</mapper>

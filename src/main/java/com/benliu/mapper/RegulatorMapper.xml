@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.benliu.mapper.RegulatorMapper">
+    <resultMap id="RegulatorDataMap" type="com.benliu.entity.RegulatorData">
+        <result property="repoTime" column="上报时间"/>
+        <result property="voltage_A" column="A相电压"/>
+        <result property="voltage_B" column="B相电压"/>
+        <result property="voltage_C" column="C相电压"/>
+        <result property="current_A" column="A相电流"/>
+        <result property="current_B" column="B相电流"/>
+        <result property="current_C" column="C相电流"/>
+    </resultMap>
+
+    <select id="getRDList" parameterType="Map" resultMap="RegulatorDataMap">
+        SELECT
+              [上报时间]
+        <if test="queryData==1">
+            ,Convert(decimal(18,2),SUM([A相电压])/COUNT([上报时间]))AS[A相电压],
+            Convert(decimal(18,2),SUM([B相电压])/COUNT([上报时间]))AS[B相电压],
+            Convert(decimal(18,2),SUM([C相电压])/COUNT([上报时间]))AS[C相电压]
+        </if>
+        <if test="queryData==2">
+            ,Convert(decimal(18,2),SUM([A相电流])/COUNT([上报时间]))AS[A相电流],
+            Convert(decimal(18,2),SUM([B相电流])/COUNT([上报时间]))AS[B相电流],
+            Convert(decimal(18,2),SUM([C相电流])/COUNT([上报时间]))AS[C相电流]
+        </if>
+        FROM [调压器数据]
+        WHERE [通信机ID]=#{machineId} AND ([上报时间] BETWEEN #{dateBegin} AND #{dateEnd})
+        GROUP BY [上报时间]
+        ORDER BY [上报时间] DESC
+    </select>
+
+    <select id="getLataTenRD" parameterType="Map" resultMap="RegulatorDataMap">
+      SELECT TOP 10
+                [上报时间]
+            <if test="queryData==1">
+                ,Convert(decimal(18,2),SUM([A相电压])/COUNT([上报时间]))AS[A相电压],
+                Convert(decimal(18,2),SUM([B相电压])/COUNT([上报时间]))AS[B相电压],
+                Convert(decimal(18,2),SUM([C相电压])/COUNT([上报时间]))AS[C相电压]
+            </if>
+            <if test="queryData==2">
+                ,Convert(decimal(18,2),SUM([A相电流])/COUNT([上报时间]))AS[A相电流],
+                Convert(decimal(18,2),SUM([B相电流])/COUNT([上报时间]))AS[B相电流],
+                Convert(decimal(18,2),SUM([C相电流])/COUNT([上报时间]))AS[C相电流]
+            </if>
+      FROM [调压器数据]
+      WHERE [通信机ID]=#{machineId}
+      GROUP BY [上报时间]
+      ORDER BY [上报时间] DESC
+    </select>
+</mapper>

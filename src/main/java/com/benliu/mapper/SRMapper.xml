@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.benliu.mapper.SRMapper">
+
+    <resultMap id="SwitchingRecdMap" type="com.benliu.entity.SwitchingRecd">
+        <result property="switchingTime" column="投切时间"/>
+        <result property="capacitorId" column="电容器ID"/>
+        <result property="capacitorSecondId" column="电容器子ID"/>
+        <result property="switchingActionId" column="投切动作ID"/>
+        <result property="switchingReasonId" column="投切原因ID"/>
+        <result property="V_A_be4Action" column="动作前A相电压"/>
+        <result property="V_B_be4Action" column="动作前B相电压"/>
+        <result property="V_C_be4Action" column="动作前C相电压"/>
+        <result property="V_A_afterAction" column="动作后A相电压"/>
+        <result property="V_B_afterAction" column="动作后B相电压"/>
+        <result property="V_C_afterAction" column="动作后C相电压"/>
+        <result property="A_A_be4Action" column="动作前A相电流"/>
+        <result property="A_B_be4Action" column="动作前B相电流"/>
+        <result property="A_C_be4Action" column="动作前C相电流"/>
+        <result property="A_A_afterAction" column="动作后A相电流"/>
+        <result property="A_B_afterAction" column="动作后B相电流"/>
+        <result property="A_C_afterAction" column="动作后C相电流"/>
+        <result property="RP_A_be4Action" column="动作前A相无功功率"/>
+        <result property="RP_B_be4Action" column="动作前B相无功功率"/>
+        <result property="RP_C_be4Action" column="动作前C相无功功率"/>
+        <result property="RP_sum_be4Action" column="动作前总无功功率"/>
+        <result property="AP_A_be4Action" column="动作前A相有功功率"/>
+        <result property="AP_B_be4Action" column="动作前B相有功功率"/>
+        <result property="AP_C_be4Action" column="动作前C相有功功率"/>
+        <result property="AP_sum_be4Action" column="动作前总有功功率"/>
+        <result property="PF_A_be4Action" column="动作前A相功率因数"/>
+        <result property="PF_B_be4Action" column="动作前B相功率因数"/>
+        <result property="PF_C_be4Action" column="动作前C相功率因数"/>
+        <result property="PF_sum_be4Action" column="动作前总功率因数"/>
+        <result property="RP_A_afterAction" column="动作后A相无功功率"/>
+        <result property="RP_B_afterAction" column="动作后B相无功功率"/>
+        <result property="RP_C_afterAction" column="动作后C相无功功率"/>
+        <result property="RP_sum_afterAction" column="动作后总无功功率"/>
+        <result property="AP_A_afterAction" column="动作后A相有功功率"/>
+        <result property="AP_B_afterAction" column="动作后B相有功功率"/>
+        <result property="AP_C_afterAction" column="动作后C相有功功率"/>
+        <result property="AP_sum_afterAction" column="动作后总有功功率"/>
+        <result property="PF_A_afterAction" column="动作后A相功率因数"/>
+        <result property="PF_B_afterAction" column="动作后B相功率因数"/>
+        <result property="PF_C_afterAction" column="动作后C相功率因数"/>
+        <result property="PF_sum_afterAction" column="动作后总功率因数"/>
+    </resultMap>
+
+    <select id="getSRList" parameterType="Map" resultMap="SwitchingRecdMap">
+        SELECT [电容器ID],[电容器子ID],[投切时间],[投切动作ID],[投切原因ID]
+                <if test="queryData==1">
+                    ,Convert(decimal(18,1),[动作前A相电压])AS[动作前A相电压],
+                    Convert(decimal(18,1),[动作前B相电压])AS[动作前B相电压],
+                    Convert(decimal(18,1),[动作前C相电压])AS[动作前C相电压],
+                    Convert(decimal(18,1),[动作后A相电压])AS[动作后A相电压],
+                    Convert(decimal(18,1),[动作后B相电压])AS[动作后B相电压],
+                    Convert(decimal(18,1),[动作后C相电压])AS[动作后C相电压]
+                </if>
+                <if test="queryData==2">
+                    ,Convert(decimal(18,1),[动作前A相电流])AS[动作前A相电流],
+                    Convert(decimal(18,1),[动作前B相电流])AS[动作前B相电流],
+                    Convert(decimal(18,1),[动作前C相电流])AS[动作前C相电流],
+                    Convert(decimal(18,1),[动作后A相电流])AS[动作后A相电流],
+                    Convert(decimal(18,1),[动作后B相电流])AS[动作后B相电流],
+                    Convert(decimal(18,1),[动作后C相电流])AS[动作后C相电流]
+                </if>
+                <if test="queryData==3">
+                    ,Convert(decimal(18,1),[动作前总有功功率])AS[动作前总有功功率],
+                    Convert(decimal(18,1),[动作前A相有功功率])AS[动作前A相有功功率],
+                    Convert(decimal(18,1),[动作前B相有功功率])AS[动作前B相有功功率],
+                    Convert(decimal(18,1),[动作前C相有功功率])AS[动作前C相有功功率],
+                    Convert(decimal(18,1),[动作后总有功功率])AS[动作后总有功功率],
+                    Convert(decimal(18,1),[动作后A相有功功率])AS[动作后A相有功功率],
+                    Convert(decimal(18,1),[动作后B相有功功率])AS[动作后B相有功功率],
+                    Convert(decimal(18,1),[动作后C相有功功率])AS[动作后C相有功功率]
+                </if>
+                <if test="queryData==4">
+                    ,Convert(decimal(18,1),[动作前总无功功率])AS[动作前总无功功率],
+                    Convert(decimal(18,1),[动作前A相无功功率])AS[动作前A相无功功率],
+                    Convert(decimal(18,1),[动作前B相无功功率])AS[动作前B相无功功率],
+                    Convert(decimal(18,1),[动作前C相无功功率])AS[动作前C相无功功率],
+                    Convert(decimal(18,1),[动作后总无功功率])AS[动作后总无功功率],
+                    Convert(decimal(18,1),[动作后A相无功功率])AS[动作后A相无功功率],
+                    Convert(decimal(18,1),[动作后B相无功功率])AS[动作后B相无功功率],
+                    Convert(decimal(18,1),[动作后C相无功功率])AS[动作后C相无功功率]
+                </if>
+                <if test="queryData==5">
+                    ,Convert(decimal(18,1),[动作前总功率因数])AS[动作前总功率因数],
+                    Convert(decimal(18,1),[动作前A相功率因数])AS[动作前A相功率因数],
+                    Convert(decimal(18,1),[动作前B相功率因数])AS[动作前B相功率因数],
+                    Convert(decimal(18,1),[动作前C相功率因数])AS[动作前C相功率因数],
+                    Convert(decimal(18,1),[动作后总功率因数])AS[动作后总功率因数],
+                    Convert(decimal(18,1),[动作后A相功率因数])AS[动作后A相功率因数],
+                    Convert(decimal(18,1),[动作后B相功率因数])AS[动作后B相功率因数],
+                    Convert(decimal(18,1),[动作后C相功率因数])AS[动作后C相功率因数]
+                </if>
+
+
+        FROM [投切记录]
+        WHERE [通信机ID]=#{machineId} AND ([投切时间] BETWEEN #{dateBegin} AND #{dateEnd})
+                <if test="capacitorId !='' ">
+                    AND [电容器ID] = #{capacitorId}
+                </if>
+                <if test="capacitorSecondId =='NULL'">
+                    AND [电容器子ID] IS NULL
+                </if>
+                <if test="capacitorSecondId !='' and capacitorSecondId!='NULL'">
+                    AND [电容器子ID] = #{capacitorSecondId}
+                </if>
+        ORDER BY [投切时间]
+    </select>
+
+    <select id="getLastTenSR" parameterType="Map" resultMap="SwitchingRecdMap">
+        SELECT TOP 10
+                [电容器ID] ,[电容器子ID] ,[投切时间] ,[投切动作ID] ,[投切原因ID] ,
+                <if test="queryData==1">
+                    Convert(decimal(18,1),[动作前A相电压])AS[动作前A相电压],
+                    Convert(decimal(18,1),[动作前B相电压])AS[动作前B相电压],
+                    Convert(decimal(18,1),[动作前C相电压])AS[动作前C相电压],
+                    Convert(decimal(18,1),[动作后A相电压])AS[动作后A相电压],
+                    Convert(decimal(18,1),[动作后B相电压])AS[动作后B相电压],
+                    Convert(decimal(18,1),[动作后C相电压])AS[动作后C相电压]
+                </if>
+                <if test="queryData==2">
+                    Convert(decimal(18,1),[动作前A相电流])AS[动作前A相电流],
+                    Convert(decimal(18,1),[动作前B相电流])AS[动作前B相电流],
+                    Convert(decimal(18,1),[动作前C相电流])AS[动作前C相电流],
+                    Convert(decimal(18,1),[动作后A相电流])AS[动作后A相电流],
+                    Convert(decimal(18,1),[动作后B相电流])AS[动作后B相电流],
+                    Convert(decimal(18,1),[动作后C相电流])AS[动作后C相电流]
+                </if>
+                <if test="queryData==3">
+                    Convert(decimal(18,1),[动作前总有功功率])AS[动作前总有功功率],
+                    Convert(decimal(18,1),[动作前A相有功功率])AS[动作前A相有功功率],
+                    Convert(decimal(18,1),[动作前B相有功功率])AS[动作前B相有功功率],
+                    Convert(decimal(18,1),[动作前C相有功功率])AS[动作前C相有功功率],
+                    Convert(decimal(18,1),[动作后总有功功率])AS[动作后总有功功率],
+                    Convert(decimal(18,1),[动作后A相有功功率])AS[动作后A相有功功率],
+                    Convert(decimal(18,1),[动作后B相有功功率])AS[动作后B相有功功率],
+                    Convert(decimal(18,1),[动作后C相有功功率])AS[动作后C相有功功率]
+                </if>
+                <if test="queryData==4">
+                    Convert(decimal(18,1),[动作前总无功功率])AS[动作前总无功功率],
+                    Convert(decimal(18,1),[动作前A相无功功率])AS[动作前A相无功功率],
+                    Convert(decimal(18,1),[动作前B相无功功率])AS[动作前B相无功功率],
+                    Convert(decimal(18,1),[动作前C相无功功率])AS[动作前C相无功功率],
+                    Convert(decimal(18,1),[动作后总无功功率])AS[动作后总无功功率],
+                    Convert(decimal(18,1),[动作后A相无功功率])AS[动作后A相无功功率],
+                    Convert(decimal(18,1),[动作后B相无功功率])AS[动作后B相无功功率],
+                    Convert(decimal(18,1),[动作后C相无功功率])AS[动作后C相无功功率]
+                </if>
+                <if test="queryData==5">
+                    Convert(decimal(18,1),[动作前总功率因数])AS[动作前总功率因数],
+                    Convert(decimal(18,1),[动作前A相功率因数])AS[动作前A相功率因数],
+                    Convert(decimal(18,1),[动作前B相功率因数])AS[动作前B相功率因数],
+                    Convert(decimal(18,1),[动作前C相功率因数])AS[动作前C相功率因数],
+                    Convert(decimal(18,1),[动作后总功率因数])AS[动作后总功率因数],
+                    Convert(decimal(18,1),[动作后A相功率因数])AS[动作后A相功率因数],
+                    Convert(decimal(18,1),[动作后B相功率因数])AS[动作后B相功率因数],
+                    Convert(decimal(18,1),[动作后C相功率因数])AS[动作后C相功率因数]
+                </if>
+
+        FROM [投切记录]
+        WHERE [通信机ID]=#{machineId}
+                <if test="capacitorId !='' ">
+                    AND [电容器ID] = #{capacitorId}
+                </if>
+                <if test="capacitorSecondId =='NULL'">
+                    AND [电容器子ID] IS NULL
+                </if>
+                <if test="capacitorSecondId !='' and capacitorSecondId!='NULL'">
+                    AND [电容器子ID] = #{capacitorSecondId}
+                </if>
+        ORDER BY [投切ID] DESC
+    </select>
+
+    <select id="getSwitchingReasons" resultType="String">
+        SELECT [投切原因]
+        FROM [投切原因]
+        ORDER BY [投切原因ID] ASC
+    </select>
+
+    <select id="getSwitchingActions" resultType="String">
+        SELECT [投切动作]
+        FROM [投切动作]
+        ORDER BY [投切动作ID] ASC
+    </select>
+
+</mapper>

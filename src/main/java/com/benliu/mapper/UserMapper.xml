@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.benliu.mapper.UserMapper">
+
+    <resultMap id="UserMap" type="com.benliu.entity.User">
+        <result property="userName" column="用户名"/>
+        <result property="passWord" column="密码"/>
+        <result property="cityId" column="范围ID"/>
+        <result property="cityType" column="范围类型"/>
+
+
+    </resultMap>
+
+    <resultMap id="MachineMap" type="com.benliu.entity.Machine">
+        <result property="id" column="通信机ID"/>
+        <result property="name" column="通信机名称"/>
+        <result property="address" column="安装地址"/>
+        <result property="lineId" column="线路ID"/>
+        <result property="type" column="设备型号"/>
+        <result property="capCap" column="调压器容量"/>
+        <result property="capReg" column="电容器容量"/>
+
+        <result property="placeTime" column="安装时间"/>
+
+
+    </resultMap>
+
+    <resultMap id="LineMap" type="com.benliu.entity.Line">
+        <result property="cityId" column="县区ID"/>
+        <result property="id" column="线路ID"/>
+        <result property="lineAddress" column="线路地址"/>
+        <result property="lineName" column="线路名称"/>
+        <result property="lineType" column="线路类型"/>
+    </resultMap>
+
+    <select id="login" parameterType="String" resultType="String">
+        SELECT COUNT(*)
+        FROM [用户管理]
+        WHERE [用户名]=#{user} AND [密码]=#{password}
+    </select>
+
+    <select id="getUserList"  parameterType="String" resultMap="UserMap">
+        SELECT [用户名],[密码],[范围ID],[范围类型]
+        FROM [用户管理]
+        WHERE [用户名]=#{user} AND [密码]=#{password}
+    </select>
+
+    <insert id="register" parameterType="String" useGeneratedKeys="true" keyProperty="ID">
+        <selectKey keyProperty="ID" order="BEFORE" resultType="int">
+            select  max([ID])+1 AS ID from [用户管理]
+        </selectKey>
+        INSERT INTO [用户管理]([用户名],[密码],[权限等级]) VALUES (#{user},#{password},2)
+
+    </insert>
+
+    <select id="getMachineList" resultMap="MachineMap">
+        SELECT [通信机ID],[通信机名称],[安装地址],[线路ID],[设备型号],[调压器容量],[电容器容量],[安装时间]
+        FROM [通信机]
+    </select>
+    <select id="getMachinesByLineId" parameterType="int" resultMap="MachineMap">
+         SELECT [通信机ID],[通信机名称],[安装地址],[线路ID],[设备型号],[调压器容量],[电容器容量],[安装时间]
+         FROM [通信机]
+         WHERE [线路ID]=#{lineId}
+
+    </select>
+    <select id="getMachineById" resultMap="MachineMap">
+        SELECT [通信机ID],[通信机名称],[安装地址],[线路ID],[设备型号],[调压器容量],[电容器容量],[安装时间]
+         FROM [通信机]
+         WHERE [通信机ID]=#{macId}
+    </select>
+   <!-- <select id="getLines" resultMap="LineMap">
+        /****** Script for SelectTopNRows command from SSMS  ******/
+        SELECT [线路ID],[线路名称],[线路地址]
+        FROM [线路]
+    </select>-->
+
+    <select id="getLines" resultMap="LineMap">
+        /****** Script for SelectTopNRows command from SSMS  ******/
+        SELECT [线路ID],[线路名称],[线路地址],[县区ID],[线路类型]
+        FROM [线路]
+    </select>
+
+    <select id="getLinesByAreaId" parameterType="int" resultMap="LineMap">
+        SELECT [线路ID],[线路名称],[线路地址],[县区ID],[线路类型]
+        FROM [线路]
+        WHERE [县区ID]=#{areaId}
+    </select>
+
+    <select id="getRegister" resultType="String">
+        SELECT COUNT(*)
+        FROM [用户管理]
+        WHERE [用户名]=#{user}
+    </select>
+
+</mapper>
