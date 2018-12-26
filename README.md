@@ -17,9 +17,7 @@
 
 #### 所用技术
 1. 前端web页面使用Thymeleaf
-2. 后端业务基于Springboot框架
-  2.1 采用HikariDataSource
-  2.2 Socket通信
+2. 后端业务基于Springboot框架, 采用HikariDataSource, Socket通信
 3. mybatis ORM操作
 4. maven 构建、打包、发布
 5. mssqlserver sql语句
