@@ -1,10 +1,12 @@
 # JstRpcms
 
-#### 介绍
-The Project Of JstRpcms.
+介绍
+该项目主要是读取数据展示。
 
-#### 软件架构
 软件架构说明
+前端：Thymeleaf
+后端：Springboot
+数据库：MSSqlServer
 
 
 #### 安装教程
