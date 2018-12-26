@@ -32,9 +32,9 @@ spring:
     name: dataSource
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://120.24.231.193\\SQLEXPRESS:1433;databaseName=JstRpcms
-    username: sa
-    password: benliu
+    url: 
+    username: 
+    password: 
     hikari:
       connection-init-sql: SELECT @@CONNECTIONS
 mybatis:
