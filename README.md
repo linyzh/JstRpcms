@@ -4,10 +4,10 @@
 该项目主要是读取数据展示。
 
 #### 软件架构说明
-前端：Thymeleaf
-后端：Springboot
-数据库：MSSqlServer
-中间件运行平台：Tomcat7及以上版本
+1. 前端：Thymeleaf
+2. 后端：Springboot
+3. 数据库：MSSqlServer
+4. 中间件运行平台：Tomcat7及以上版本
 
 #### 安装教程
 
@@ -20,9 +20,9 @@
 2. 后端业务基于Springboot框架
 2.1 采用HikariDataSource
 2.2 Socket通信
-3.mybatis ORM操作
-4.maven 构建、打包、发布
-5.mssqlserver sql语句
+3. mybatis ORM操作
+4. maven 构建、打包、发布
+5. mssqlserver sql语句
 
 
 #### 码云特技
