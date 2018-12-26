@@ -1,0 +1,57 @@
+#server:
+#  port: 8090
+#  servlet:
+#    session:
+#      timeout: 30
+#    context-path: /qvr
+#  tomcat:
+#    max-threads: 800
+#    uri-encoding: UTF-8
+#    basedir: D:/springboot-tomcat-tmp
+    
+# spring information
+spring:
+  resources:
+    static-locations: classpath:/statics/
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  datasource:
+    name: dataSource
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://120.24.231.193\\SQLEXPRESS:1433;databaseName=JstRpcms
+    username: sa
+    password: benliu
+    hikari:
+      connection-init-sql: SELECT @@CONNECTIONS
+
+mybatis:
+  mapper-locations:
+  - classpath:com/benliu/mapper/*.xml
+  type-aliases-package: com.benliu.entity
+  
+benliu:
+  socket:
+    address: 120.24.231.193
+    port: 2091
+    timeout: 3000
+    
+#debug: false
+#trace: false
+# log configuration information
+logging:
+  path: C:/tomcat-tmp-jstrpcms
+  file: jstrpcms-app.log
+  level:
+    org.springframework: INFO
